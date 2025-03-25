@@ -1,0 +1,16 @@
+[package]
+name = "gix-ffi"
+version = "0.0.1"
+edition = "2024"
+description = "Unofficial gitoxide FFI bindings"
+publish = false
+
+[lib]
+name = "gix_ffi"
+crate-type = ["cdylib"]
+path = "src/lib.rs"
+
+[dependencies]
+gix-protocol = { version = "0.48.0", features = ["blocking-client", "fetch", "handshake"] }
+gix-transport = { version = "0.45.0", features = ["blocking-client", "http-client-reqwest-native-tls"] }
+gix-url = "0.29.0"
