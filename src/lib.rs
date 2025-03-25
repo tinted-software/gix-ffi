@@ -8,7 +8,9 @@ pub enum GitTransport {
 }
 
 #[unsafe(no_mangle)]
-pub unsafe extern "C" fn git_transport_http_new(uri: *const c_char) -> *mut GitTransport {
+pub unsafe extern "C" fn git_transport_http_new(
+    uri: *const c_char,
+) -> *mut GitTransport {
     let url = {
         let raw_url = unsafe { CStr::from_ptr(uri) };
 
@@ -38,8 +40,9 @@ mod tests {
     #[test]
     fn transport() {
         unsafe {
-            let transport =
-                git_transport_http_new(c"https://github.com/zlib-ng/zlib-ng.git".as_ptr());
+            let transport = git_transport_http_new(
+                c"https://github.com/zlib-ng/zlib-ng.git".as_ptr(),
+            );
             git_transport_free(transport);
         }
     }
